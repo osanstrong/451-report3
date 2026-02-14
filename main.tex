@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Lab 3: }
+\author{Owen Strong \\
+\itshape Prof.: Angela DiFulvio\\
+\itshape TA: Kholod Mahmoud \\
+\itshape TA: Schaffer Bauer \\
+\itshape TA: Justin Jia \\
+}
+\date{7 February 2026}
+
+\usepackage[
+    style=ieee
+]{biblatex}
+\bibliography{refs.bib}
+
+\usepackage[letterpaper, margin=1in]{geometry}
+\newcommand{\figwidth}{0.75\linewidth}
+
+\newcommand{\micCi}{$\mathrm{\mu Ci}$}
+
+\usepackage{placeins} % FloatBarrier
+\usepackage{amsmath} % align
+
+\begin{document}
+
+\maketitle
+\pagebreak
+\tableofcontents
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction and Background}
+
+\section{Experimental Procedure}\label{sec:methods}
+\section{Experimental Results}\label{sec:results}
+
+%%%% Experiment 1
+
+% Plot the counting curve for the GM counter. Report the plateau slope.
+For a range of voltage bias settings, we measured detector pulses successfully recorded over 30-second periods with a $0.1$~.
+These counts are compared to the biases used in Figure~\ref{fig:exp1-bias-v-counts}.
+As expected, the measured counts begin to plateau around 700V, before increasing rapidly with increased voltage after 950V.
+This plateau region had a slope of approximately 0.680 counts for every additional volt of increased bias.\\
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\figwidth]{figs/Exp1_counts-v-volt.png}
+    \caption{Radiation counts for a 0.1\micCi measured by the GM detector over 30 second intervals with the Power Supply set to various voltages.
+    A plateau region is observed, with a slope of 0.680 counts per volt of bias increase.}
+    \label{fig:exp1-bias-v-counts}
+\end{figure}
+
+Based on this voltage behavior, we selected an appropriate operating voltage for further experiments.
+Two factors motivated our choice, resulting in two different voltage choices for experiments 2 and 3.
+Given potential uncertainty in voltage supply, a stable count rate was desired with respect to changes in voltage.
+Following this motivation, we chose a voltage of 850V, a point closer to the center of the plateau on Figure~\ref{fig:exp1-bias-v-counts}, where we visually judged the slope to be the least.
+This voltage was used for experiment 2.\\
+
+Our second motivation was to minimize the effect of dead time on measurements.
+Optimizing for this motivation, an appropriate voltage might be one at the start of the plateau (in our case 700V), to achieve a high count rate without drastically raising the rate of count loss due to dead time.\\
+
+Between experiment 2 and experiment 3, upon feedback from the professor we decided to instead prioritize minimal dead time loss, and changed our voltage supply bias to 700V. 
+Experiment 3 was conducted at this lower voltage.
+
+\\
+\section{Discussion}\label{sec:disc}
+\section{Conclusions}\label{sec:conc}
+
+% \bibliographystyle{sty/ieeetran}
+\printbibliography
+\end{document}
