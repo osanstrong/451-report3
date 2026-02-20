@@ -5,7 +5,9 @@
 **.log
 **.run.xml
 **.blg
+**.toc
 **.pdf
 sty/ieeetran.bst
 **:mshield
 **:Zone.Identifier
+Makefile
