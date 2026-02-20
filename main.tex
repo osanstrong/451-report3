@@ -94,10 +94,51 @@ And, modeling counts as a Poisson distribution, an uncertainty for this rate:
 \end{equation}
 Then, we accounted for the background rate.
 For the identical measurement over 5 minutes (300 seconds), we measured 95 counts, yielding as a Poisson distribution an uncertainty of $\sqrt{95}$.
+This corresponds to a background count rate and uncertainty of:
+\begin{equation}
+    m_b\pm\sigma_b=95~\mathrm{counts}\times\left(300~\mathrm{s}\right)^{-1}\pm\frac{\sqrt{95}}{300}=0.317\pm0.032~\mathrm{s}^-1
+\end{equation}
 
-From source 1 alone, we measured 60-second counts of 131, 118, and 124, yielding with Equations~\ref{eq:count-rate} and \ref{eq:uncertainty}, a count rate $m_1=$
+Thus, to calculate the net count rate and uncertainty for each source:
+\begin{equation}
+    m=m_0-m_b
+\end{equation}
+\begin{equation}\label{eq:new-uncertainty}
+    \sigma=\sqrt{\sigma_0 + \sigma_b}
+\end{equation}
+
+From source 1 alone, we measured 60-second counts of 131, 118, and 124, yielding with Equations~\ref{eq:count-rate} through \ref{eq:new-uncertainty}, a count rate $m_1=1.756\pm0.112~\mathrm{s^{-1}}$.\\
+
+For sources 1 and 2 combined, we measured 60-second counts of 227, 216, and 226, yielding a count rate $m_{12}=3.400\pm0.147\mathrm{s^{-1}}$.\\
+
+Finally, for source 2 alone, we measured 60-second counts of 120, 137, and 106, yielding a count rate $m_2=1.700\pm0.111\mathrm{s^{-1}}$.\\
+
+Using these rate measurements, we were able to estimate the dead time of the detector using Equation~\ref{eq:dead-time}:
+\begin{equation}\label{eq:dead-time}
+    \tau(m_1,m_{12},m_2)=\frac{1-\sqrt{1-\frac{m_{12}\left(m_1+m_2-m_{12}\right)}{m_1m_2}}}{m_{12}}
+\end{equation}
+
+Using the derivatives of this function with respect to each uncertain count rate:
 
 
+% (which may be found in Appendix~ at \url{https://www.desmos.com/calculator/6eplmvfm3o}):
+\begin{equation}\label{eq:t-m1}
+    \tau_{m_1}=-\frac{\frac{1}{m_{12}}\left(\frac{-m_{12}m_{1}+m_{12}\left(m_{1}+m_{2}-m_{12}\right)}{m_{1}^{2}m_{2}}\right)}{2\sqrt{1-\frac{m_{12}\left(m_{1}+m_{2}-m_{12}\right)}{m_{1}m_{2}}}}
+\end{equation}
+\begin{equation}
+    \tau_{m_2}=-\frac{\frac{1}{m_{12}}\left(\frac{-m_{12}m_{2}+m_{12}\left(m_{2}+m_{1}-m_{12}\right)}{m_{2}^{2}m_{1}}\right)}{2\sqrt{1-\frac{m_{12}\left(m_{2}+m_{1}-m_{12}\right)}{m_{2}m_{1}}}}
+\end{equation}
+\begin{equation}
+    \tau_{m_{12}}=\frac{\left(-m_{12}\frac{\left(\frac{2m_{12}-\left(m_{1}+m_{2}\right)}{m_{1}m_{2}}\right)}{2\sqrt{1-\frac{m_{12}\left(m_{1}+m_{2}-m_{12}\right)}{m_{1}m_{2}}}}+\sqrt{1-\frac{m_{12}\left(m_{1}+m_{2}-m_{12}\right)}{m_{1}m_{2}}}-1\right)}{m_{12}^{2}}
+\end{equation}
+
+we calculated the uncertainty of the dead time $\tau$ as a function of $m_1$, $m_{12}$, and $m_2$:
+\begin{equation}\label{eq:t-unc}
+    \sigma_\tau=\sqrt{\tau_{m_1}^2\sigma_1^2 + \tau_{m_{12}}^2\sigma_{12}^2 + \tau_{m_2}^2\sigma_2^2}
+\end{equation}
+
+Using Equations~\ref{eq:dead-time} through \ref{eq:t-unc}, we calculated a dead time of $9.460\pm36.700$~ms.
+Our full numerical calculations are demonstrated at \url{https://www.desmos.com/calculator/6eplmvfm3o}.
 % What the counts were, associated rates and uncertainty were
 % Set up system of equations for dead time of detector usning the two sources that we assume are equal using their gross count rates
 % Solve for associated uncertainty Do we show formula for that?
@@ -109,6 +150,7 @@ From source 1 alone, we measured 60-second counts of 131, 118, and 124, yielding
 % plotted in figure deeedum
 % calculate half life, showing regression
 % Explain how curve doesn't look that curvy because we only record for 45 minutes, compared to the half life of about an hour so any noise keeps it from looking right.
+\FloatBarrier
 \section{Discussion}\label{sec:disc}
 \section{Conclusions}\label{sec:conc}
 
