@@ -5,7 +5,7 @@
 \author{Owen Strong \\
 \itshape Prof.: Angela DiFulvio\\
 \itshape TA: Kholod Mahmoud \\
-\itshape TA: Schaffer Bauer \\
+\itshape TA: Shaffer Bauer \\
 \itshape TA: Justin Jia \\
 }
 \date{7 February 2026}
@@ -28,6 +28,7 @@
 \maketitle
 \pagebreak
 \tableofcontents
+\pagebreak
 \begin{abstract}
 
 \end{abstract}
@@ -66,7 +67,37 @@ Between experiment 2 and experiment 3, upon feedback from the professor we decid
 Experiment 3 was conducted at this lower voltage.\\
 
 % Experiment 2
-We measured 
+The pulse output behavior of the GM Detector was measured and compared over prolonged exposure.
+Using the Oscilloscope set to visualize signal traces, the combined trace of these signals compared in time to the signal before them can be seen in Figure~\ref{fig:exp2-osc-dead}.\\
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\figwidth]{figs/Exp2_oscDeadTime.jpg}
+    \caption{Traces (faded yellow) of signals (bright yellow) from the GM Detector while exposed to the 30~\micCi $\beta$ source.
+    Visualized using the Oscilloscope, with traces set to visible. 
+    Note the gap after the initial signal peak, where following pulses did not leave a trace, followed by a ``recovery'' period in which following pulses were substantially attenuated.}
+    \label{fig:exp2-osc-dead}
+\end{figure}
+
+Using the measure function of the Oscilloscope, we measured the dead time, where no followup pulse could be detected, to be $562\pm2~\mathrm{\mu s}$.
+Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1,384\pm2~\mathrm{\mu s}$.\\
+
+We measured three 60-second trials each of GM Detector counts while exposed to 1\micCi~source 1, 1\micCi~source 2 and 1\micCi~source 2 simultaneously, then 1\micCi~source 2 alone, for a total of nine trials.
+For each set of 60-second counts $C_1, C_2, C_3$, we calculated a base count rate:
+\begin{equation}\label{eq:count-rate}
+    m_0=\frac{C_1+C_2+C_3}{180~\mathrm{seconds}}
+\end{equation}
+And, modeling counts as a Poisson distribution, an uncertainty for this rate:
+\begin{equation}\label{eq:uncertainty}
+    \sigma_0=\frac{\sqrt{C_1+C_2+C_3~\mathrm{counts~within~180~seconds}}}{\mathrm{180~seconds}}
+\end{equation}
+Then, we accounted for the background rate.
+For the identical measurement over 5 minutes (300 seconds), we measured 95 counts, yielding as a Poisson distribution an uncertainty of $\sqrt{95}$.
+
+From source 1 alone, we measured 60-second counts of 131, 118, and 124, yielding with Equations~\ref{eq:count-rate} and \ref{eq:uncertainty}, a count rate $m_1=$
+
+
 % What the counts were, associated rates and uncertainty were
 % Set up system of equations for dead time of detector usning the two sources that we assume are equal using their gross count rates
 % Solve for associated uncertainty Do we show formula for that?
@@ -80,6 +111,21 @@ We measured
 % Explain how curve doesn't look that curvy because we only record for 45 minutes, compared to the half life of about an hour so any noise keeps it from looking right.
 \section{Discussion}\label{sec:disc}
 \section{Conclusions}\label{sec:conc}
+
+\appendix
+\section{Equipment Details}
+In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{}
+
+\newcommand{\na}{$N/A$}
+\begin{table}
+    \centering
+    \caption{Details of the equipment used in this laboratory.
+    Where a detail could not be identified for a given device, it is replaced with ``\na''.}
+    \begin{tabular}{c|ccc}
+        Item & Serial Number & Manufacturer & Address \\
+
+    \end{tabular}
+\end{table}
 
 % \bibliographystyle{sty/ieeetran}
 \printbibliography
