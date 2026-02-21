@@ -23,6 +23,8 @@
 
 \usepackage{placeins} % FloatBarrier
 \usepackage{amsmath} % align
+\usepackage{xcolor}
+\usepackage[colorlinks=true, linkcolor=violet, urlcolor=violet]{hyperref}
 
 \begin{document}
 
@@ -176,7 +178,7 @@ Demonstrations of our full numerical calculations may be found at \url{https://w
 \FloatBarrier\subsection{Experiment 3: Rate of Radioactive Decay}
 
 As measured by GM detector counts within a span of 60 seconds, we measured activity of the \InMeta foil sample every 90 seconds over a period of approximately 49 minutes.
-The relative activity of the sample through these counts over time can be observed in Figure~\ref{fig:exp2-116m}.\\
+The relative activity of the sample through these counts over time can be observed in Figure~\ref{fig:exp3-in116m}.\\
 
 \begin{figure}[!htb]
     \centering
@@ -209,9 +211,9 @@ This way, a clear distinction could be made between this measurement and a stron
 This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
 
 It is very possible that our results from experiment~2 demonstrate why a choice of 700~V would be superior.
-While we were able to estimate the dead time of our detector using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}~ms$) far exceeded the magnitude of that estimate.
+While we were able to estimate the dead time of our detector using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
 Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
-Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still far less than that calculated by the two source method.\\
+Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still nearly an order of magnitude different than that calculated by the two source method.\\
 
 It is very possible, although not certain, that our selection of 850~V could have negatively impacted our estimate. 
 As the purpose of comparing different source strengths is to compare the effect of dead time on count rates (with the formula simply being an abstraction of this to take three measurements and yield a dead time), an ideal measurement may have been taken at the start of the plateau for the strength of just one source, around 700~V in Figure~\ref{fig:exp1-bias-v-counts}.
@@ -219,10 +221,10 @@ If measurements for a single source fall around the start of that plateau, then 
 
 In experiment 3, there was a stronger than expected noise in count rates which impacted our ability to estimate half life, as is most clear when viewing the measurements over time in Figure~\ref{fig:exp3-in116m}.
 Our half-life estimate of 63.606 minutes is comparable to the literature value of 54.29~minutes\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}, but not comfortably close, and the regression of our data we used to estimate this value only had a correlation of $R^2=0.806$.
-Another factor that definitely compounded with the noise present was the short time period.
+Another factor that definitely compounded with the noise present was the short time period over which our measurements were taken.
 Due to time constraints from being required to manually perform measurements during class time, we were only able to perform measurements over a period of 49 minutes, not even a full half life of the material.
 Combined with noise, the exponential relationship itself is not even visually obvious without context that the data came from radioactive decay.
-A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing certainty on the exponential relationship and decay rate.
+A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing a confident and accurate estimate of decay rate.
 
 %  $562\pm2~\mathrm{\mu s}$.
 % Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
