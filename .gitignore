@@ -5,6 +5,7 @@
 **.log
 **.run.xml
 **.blg
+**.out
 **.toc
 **.pdf
 sty/ieeetran.bst
