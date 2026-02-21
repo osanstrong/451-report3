@@ -65,14 +65,14 @@ plat_creg = np.array(plat_v)*m + b
 slope = (counts[plat_idx[-1]]-counts[-plat_idx[0]]) / (biases[plat_idx[-1]] - biases[plat_idx[0]])
 
 
-plt.xlabel("High voltage power supply Bias setting (V)")
-plt.ylabel("Measured Counts over 30 seconds")
-plt.plot(biases, counts, label="Measured Counts")
-# plt.plot([biases[i] for i in plat_idx], [counts[i] for i in plat_idx], label=f"Plateau Region (Slope: {slope} Counts/Volt)")
-plt.plot(plat_v, plat_creg, label=f"Plateau region (Slope: {m:.3f} counts per V)")
+# plt.xlabel("High voltage power supply Bias setting (V)")
+# plt.ylabel("Measured Counts over 30 seconds")
+# plt.plot(biases, counts, label="Measured Counts")
+# # plt.plot([biases[i] for i in plat_idx], [counts[i] for i in plat_idx], label=f"Plateau Region (Slope: {slope} Counts/Volt)")
+# plt.plot(plat_v, plat_creg, label=f"Plateau region (Slope: {m:.3f} counts per V)")
 
-plt.legend()
-plt.show()
+# plt.legend()
+# plt.show()
 
 
 #### Experiment 3
@@ -128,14 +128,14 @@ fit_counts = np.exp(times*m + b)
 hl = -np.log(2) / m
 print(f"Half life: {hl} minutes")
 
-# plt.plot(times, counts, label="Measured counts of irradiated indium")
-# plt.plot(times, fit_counts, label="Exponential fit")
-# bot, top = plt.ylim()
-# plt.ylim(0, top)
+plt.plot(times, counts, label="Measured counts of irradiated indium")
+plt.plot(times, fit_counts, label="Exponential fit")
+bot, top = plt.ylim()
+plt.ylim(0, top)
 
-# plt.xlabel("Time elapsed (m)")
-# plt.ylabel("Counts detected in 60-second interval")
+plt.xlabel("Time elapsed (m)")
+plt.ylabel("Counts detected in 60-second interval")
 
-# plt.legend()
-# plt.show()
+plt.legend()
+plt.show()
 

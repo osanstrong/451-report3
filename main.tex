@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 
-\title{Lab 3: }
+\title{Lab 3: Proportional Counters and Geiger Muller (GM) Counters}
 \author{Owen Strong \\
 \itshape Prof.: Angela DiFulvio\\
 \itshape TA: Kholod Mahmoud \\
@@ -19,6 +19,7 @@
 \newcommand{\figwidth}{0.75\linewidth}
 
 \newcommand{\micCi}{$\mathrm{\mu Ci}$}
+\newcommand{\InMeta}{$\mathrm{^{116m}In}$}
 
 \usepackage{placeins} % FloatBarrier
 \usepackage{amsmath} % align
@@ -35,11 +36,35 @@
 
 \section{Introduction and Background}
 
+
+\subsection{Half Life and activity}
+Every nucleus of a specific radioactive species, has a definite probability within a unit of time of decaying.\cite{npre_lab_3_manual_2025}
+As a result, the rate of decay of a given specimen of that isotope at a given instant is directly proportional to the total number of isotope nuclei present:
+\begin{equation}
+    \frac{dN}{dt}=-\lambda N
+\end{equation}
+where $N$ corresponds to the number of isotopes present at a time $t$.
+The constant $\lambda$ is a ``decay constant'' specific to the isotope, and is a measure of decay probability per unit time.
+Separating and integrating this relation yields an exponential description of isotope quantity within that specimen:
+\begin{equation}\label{eq:decay}
+    N(t)=N_0e^{-\lambda t}
+\end{equation}
+where $N_0$ corresponds to the quantity at time $t=0$.\\
+
+A more common way than $\lambda$ of describing the decay of a given radioactive species is the half-life, denoted $t_{1/2}$.
+The half life represents the amount of time after which half of the original sample will have decayed, and may be given by the formula:
+\begin{equation}\label{eq:half-life}
+    t_{1/2} = \frac{\ln(2)}{\lambda}
+\end{equation}
+
+This quantity is readily available for most radioactive species in data collections such as those published by the Korean Atomic Energy Research Institute.\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}
+
 \section{Experimental Procedure}\label{sec:methods}
 \section{Experimental Results}\label{sec:results}
+After performing the above procedures, we observed the following results:
 
 %%%% Experiment 1
-
+\subsection{Experiment 1: Measurement of the Counting Curve}
 % Plot the counting curve for the GM counter. Report the plateau slope.
 For a range of voltage bias settings, we measured detector pulses successfully recorded over 30-second periods with a $0.1$~.
 These counts are compared to the biases used in Figure~\ref{fig:exp1-bias-v-counts}.
@@ -66,6 +91,8 @@ Optimizing for this motivation, an appropriate voltage might be one at the start
 Between experiment 2 and experiment 3, upon feedback from the professor we decided to instead prioritize minimal dead time loss, and changed our voltage supply bias to 700V. 
 Experiment 3 was conducted at this lower voltage.\\
 
+
+\subsection{Dead Time Measurement}
 % Experiment 2
 The pulse output behavior of the GM Detector was measured and compared over prolonged exposure.
 Using the Oscilloscope set to visualize signal traces, the combined trace of these signals compared in time to the signal before them can be seen in Figure~\ref{fig:exp2-osc-dead}.\\
@@ -138,7 +165,7 @@ we calculated the uncertainty of the dead time $\tau$ as a function of $m_1$, $m
 \end{equation}
 
 Using Equations~\ref{eq:dead-time} through \ref{eq:t-unc}, we calculated a dead time of $9.460\pm36.700$~ms.
-Our full numerical calculations are demonstrated at \url{https://www.desmos.com/calculator/6eplmvfm3o}.
+Demonstrations of our full numerical calculations may be found at \url{https://www.desmos.com/calculator/6eplmvfm3o}.
 % What the counts were, associated rates and uncertainty were
 % Set up system of equations for dead time of detector usning the two sources that we assume are equal using their gross count rates
 % Solve for associated uncertainty Do we show formula for that?
@@ -146,12 +173,34 @@ Our full numerical calculations are demonstrated at \url{https://www.desmos.com/
 
 
 % Experiment 3
+\FloatBarrier\subsection{Experiment 3: Rate of Radioactive Decay}
+
+As measured by GM detector counts within a span of 60 seconds, we measured activity of the \InMeta foil sample every 90 seconds over a period of approximately 49 minutes.
+The relative activity of the sample through these counts over time can be observed in Figure~\ref{fig:exp2-116m}.\\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\figwidth]{figs/Exp3_in116-activity.png}
+    \caption{Relative activity (as measured by GM detector counts over 60 seconds) of the \InMeta source every 90 seconds over a period spanning 49.5 minutes.}
+    \label{fig:exp3-in116m}
+\end{figure}
+
+As seen in Equation~\ref{eq:decay}, we expect the remaining quantity of an isotope, and thus its activity, to follow an exponential decay with respect to time.
+If we take the natural logarithm of the expected activity:
+\begin{equation}\label{eq:log-decay}
+    \ln(N)=-\lambda t + \ln(N_0)
+\end{equation}
+we find that we expect a linear relationship, where slope corresponds to the isotope's decay constant $\lambda$.
+Using Equation~\ref{eq:log-decay}, we fit a linear relationship between the logarithm of a measurement and the elapsed time before that measurement.
+We found a reasonable relationship ($R^2=0.806$), with a slope $-\lambda=-0.0109$.
+Using Equation~\ref{eq:half-life}, we calculated an estimated half life of $63.606$~minutes.
 % Yada yada were measured for over 45 minutes
 % plotted in figure deeedum
 % calculate half life, showing regression
 % Explain how curve doesn't look that curvy because we only record for 45 minutes, compared to the half life of about an hour so any noise keeps it from looking right.
 \FloatBarrier
 \section{Discussion}\label{sec:disc}
+
 \section{Conclusions}\label{sec:conc}
 
 \appendix
