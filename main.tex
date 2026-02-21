@@ -108,7 +108,7 @@ Using the Oscilloscope set to visualize signal traces, the combined trace of the
 \end{figure}
 
 Using the measure function of the Oscilloscope, we measured the dead time, where no followup pulse could be detected, to be $562\pm2~\mathrm{\mu s}$.
-Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1,384\pm2~\mathrm{\mu s}$.\\
+Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 
 We measured three 60-second trials each of GM Detector counts while exposed to 1\micCi~source 1, 1\micCi~source 2 and 1\micCi~source 2 simultaneously, then 1\micCi~source 2 alone, for a total of nine trials.
 For each set of 60-second counts $C_1, C_2, C_3$, we calculated a base count rate:
@@ -200,22 +200,48 @@ Using Equation~\ref{eq:half-life}, we calculated an estimated half life of $63.6
 % Explain how curve doesn't look that curvy because we only record for 45 minutes, compared to the half life of about an hour so any noise keeps it from looking right.
 \FloatBarrier
 \section{Discussion}\label{sec:disc}
+In experiment~1, while we find a very suitable plateau in the change of count rate with respect to GM detector voltage, there was some dispute in how to use this to calculate a suitable operating voltage.\\
 
+One motivation is to minimize the possible effect of variation in voltage supply.
+Under this motivation, a suitable voltage would be more towards the middle of the plateau, around $850$~V where we performed experiment~2.
+However, a second motivation would be to minimize \emph{any} effect of dead time on measurements for the same strength as the 1.0~\micCi source used for experiment 1, while allowing for observation of the effect with stronger sources.
+This way, a clear distinction could be made between this measurement and a stronger one.
+This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
+
+It is very possible that our results from experiment~2 demonstrate why a choice of 700~V would be superior.
+While we were able to estimate the dead time of our detector using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}~ms$) far exceeded the magnitude of that estimate.
+Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
+Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still far less than that calculated by the two source method.\\
+
+It is very possible, although not certain, that our selection of 850~V could have negatively impacted our estimate. 
+As the purpose of comparing different source strengths is to compare the effect of dead time on count rates (with the formula simply being an abstraction of this to take three measurements and yield a dead time), an ideal measurement may have been taken at the start of the plateau for the strength of just one source, around 700~V in Figure~\ref{fig:exp1-bias-v-counts}.
+If measurements for a single source fall around the start of that plateau, then we would expect dead time to have minimal effect while essentially still maximizing the comparative effect of dead time on the measurement of two sources simultaneously.\\
+
+In experiment 3, there was a stronger than expected noise in count rates which impacted our ability to estimate half life, as is most clear when viewing the measurements over time in Figure~\ref{fig:exp3-in116m}.
+Our half-life estimate of 63.606 minutes is comparable to the literature value of 54.29~minutes\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}, but not comfortably close, and the regression of our data we used to estimate this value only had a correlation of $R^2=0.806$.
+Another factor that definitely compounded with the noise present was the short time period.
+Due to time constraints from being required to manually perform measurements during class time, we were only able to perform measurements over a period of 49 minutes, not even a full half life of the material.
+Combined with noise, the exponential relationship itself is not even visually obvious without context that the data came from radioactive decay.
+A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing certainty on the exponential relationship and decay rate.
+
+%  $562\pm2~\mathrm{\mu s}$.
+% Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 \section{Conclusions}\label{sec:conc}
 
 \appendix
 \section{Equipment Details}
-In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{}
+In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{tab:equip}
 
 \newcommand{\na}{$N/A$}
 \begin{table}
     \centering
     \caption{Details of the equipment used in this laboratory.
-    Where a detail could not be identified for a given device, it is replaced with ``\na''.}
+    Where a detail could not be identified for a given device, it is replaced with ``\na''.}\label{tab:equip}
     \begin{tabular}{c|ccc}
         Item & Serial Number & Manufacturer & Address \\
 
     \end{tabular}
+
 \end{table}
 
 % \bibliographystyle{sty/ieeetran}
