@@ -1,10 +1,10 @@
 import numpy as np
 from numpy import log as ln, exp 
 
-
+ITERCOUNT = 1000
 
 def find_n(m, dead_time):
-    trials = 100
+    trials = ITERCOUNT
 
     n_peak = 1/dead_time # Maximum n could be before m starts going back down again
 
@@ -31,7 +31,7 @@ def find_t(m1, m2, m12):
     n1 = 0
     n2 = 0
     n12 = 0
-    for i in range(100):
+    for i in range(ITERCOUNT):
         t = (tmin + tmax) / 2
         n1 = find_n(m1, t)
         n2 = find_n(m2, t)
@@ -68,3 +68,12 @@ def sq(x):
     return x*x
 ET = np.sqrt(sq(dt_dm1)*sq(E1) + sq(dt_dm2)*sq(E2) + sq(dt_dm12)*sq(E12))
 print(f'Dead time error: {ET}')
+
+#### OUTPUT WITH ITERCOUNT=1000 ####
+# Observed rates: m1 of 1.756+-0.112, m2 of 1.7+-0.111, m12 of 3.4+-0.147
+# All dead time (t) estimates in seconds.
+# t: 0.009303179442311068
+# dt_dm1: 0.15947962250417377 s
+# dt_dm2: 0.15930658013714633 s
+# dt_dm2: -0.16475597860401459 s
+# Dead time error: 0.03490410758591285
