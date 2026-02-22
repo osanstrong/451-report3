@@ -1,5 +1,4 @@
 import numpy as np
-from numpy import log as ln, exp 
 
 ITERCOUNT = 1000
 
@@ -16,7 +15,7 @@ def find_n(m, dead_time):
     # bisection algorithm
     for i in range(trials):
         n = (n_max + n_min) / 2
-        new_m = n*exp(-n*t)
+        new_m = n*np.exp(-n*t)
 
         if (new_m > m): # That n was too high, because it should result in a lower count rate than what we actually observed
             n_max = n
@@ -26,7 +25,7 @@ def find_n(m, dead_time):
 
 def find_t(m1, m2, m12):
     tmin = 0
-    tmax = 1/(m12*exp(1))
+    tmax = 1/(m12*np.exp(1))
     t = (tmin + tmax) / 2
     n1 = 0
     n2 = 0
@@ -77,3 +76,6 @@ print(f'Dead time error: {ET}')
 # dt_dm2: 0.15930658013714633 s
 # dt_dm2: -0.16475597860401459 s
 # Dead time error: 0.03490410758591285
+
+## Script written by ostrong2@illinois.edu for Laboratory 3 of UIUC NPRE451: Radiation Laboratory
+## February 21, 2026
