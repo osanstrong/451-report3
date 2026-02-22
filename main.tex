@@ -1,14 +1,14 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 
-\title{Lab 3: Proportional Counters and Geiger Muller (GM) Counters}
+\title{Lab 3: Proportional Counters and Geiger-Muller (GM) Counters}
 \author{Owen Strong \\
 \itshape Prof.: Angela DiFulvio\\
 \itshape TA: Kholod Mahmoud \\
 \itshape TA: Shaffer Bauer \\
 \itshape TA: Justin Jia \\
 }
-\date{7 February 2026}
+\date{21 February 2026}
 
 \usepackage[
     style=ieee
@@ -20,11 +20,13 @@
 
 \newcommand{\micCi}{$\mathrm{\mu Ci}$}
 \newcommand{\InMeta}{$\mathrm{^{116m}In}$}
+\newcommand{\CsSrc}{$^{137}$Cs}
 
 \usepackage{placeins} % FloatBarrier
 \usepackage{amsmath} % align
 \usepackage{xcolor}
 \usepackage[colorlinks=true, citecolor=violet, linkcolor=violet, urlcolor=violet]{hyperref}
+\usepackage{enumitem}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -34,6 +36,20 @@
 \pagebreak
 \pagenumbering{arabic}
 \begin{abstract}
+When measuring radiation, it is highly important to understand the nuance and limitations of equipment such as detectors used.
+In this laboratory, we investigated the effect of one such limitation, dead time for a Geiger-Muller detector, alongside radioactive decay more broadly. \\
+
+We recorded the observed counts over 60 second periods at different voltages supplied to the Geiger-Muller detector in order to select a suitable operating voltage.
+Using a 30.0~\micCi~\CsSrc~beta source, we visually observed the dead time and recovery time of the detector.
+Using two 1.0~\micCi~\CsSrc~beta sources (over three 60-second measurements of each source alone and the two combined, against a 5-minute background measurement), we performed a two-source  assessment of dead time under both ideally paralyzable and non-paralyzable models of the detector.
+Using the same detector, we measured 60-second counts every 90 seconds of an \InMeta~foil source over a period of 49 minutes to make an estimate of the isotope's half life.\\
+
+We observed a plateau of count rate with respect to operating voltage between approximately 700~V and 900~V, and used to eventually select an operating voltage of 700~V.
+Using the 30.0~\micCi~source and the oscilloscope trace, we found a dead time of $562\pm2~\mathrm{\mu s}$.
+Using the two-source method with the two 1.0~\micCi~sources, we estimated potential dead times of $9.460\pm36.700$~ms under a non-paralyzable model of the detector and $9.303\pm34.904$~ms under a detectable model, yielding little insight about the paralyzability of the detector.
+Using a linear regression of correlation $R^2=0.806$, we estimated the half life of~\InMeta~to be 63.606 minutes.\\
+
+We determine the effect of dead time on Geiger-Muller detector operation was demonstrated successfully, though not without also demonstrating limitations of short period count measurements in making confident estimations of dead time or half-life.
 
 \end{abstract}
 
@@ -147,13 +163,21 @@ The weak sources may be seen next to the detector in Figure~\ref{fig:mat-weak12}
 We additionally used a 30~\micCi~$^{137}$Cs beta radiation source, henceforth known as the strong source.
 The strong source may be seen in Figure~\ref{fig:mat-strong}.\\
 
-Finally, we used a source of \InMeta, in indium foil irradiated using a PuBe source until just prior to experiments.
-
-\begin{figure}
+\begin{figure}[!htb]
     \centering
     \includegraphics[width=\figwidth]{figs/Mat4_StrongSource.jpg}
     \caption{The strong source, positioned in front of the detector as in experiment~1.}
     \label{fig:mat-strong}
+\end{figure}
+
+Finally, we used a source of \InMeta, in indium foil irradiated using a PuBe source until just prior to experiments.
+The foil source may be seen in Figure~\ref{fig:mat-in116}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\figwidth,angle=270]{figs/Mat5_indium116.jpg}
+    \caption{The \InMeta~sample positioned in front of the detector, as in experiment~3.}
+    \label{fig:mat-in116}
 \end{figure}
 
 \subsubsection{Programmable Power Supply}
@@ -227,7 +251,7 @@ Once again using the same experimental setup, we observed the radioactive decay 
 
 We set the counter to record counts over periods of 60 seconds.\\
 
-Having previously ensured at the start of the lab that a sample of indium foil was being irradiated using a PuBe source, we received such a sample from the TA, and immediately placed it next to the detector.
+Having previously ensured at the start of the lab that a sample of indium foil was being irradiated using a PuBe source, we received such a sample from the TA, and immediately placed it next to the detector as could be seen in Figure~\ref{fig:mat-in116}.
 We then performed a series of 60-second count observations every 90 seconds (yielding 30 seconds to record data), repeating for 49 minutes to observe the decline in activity of the sample.\\
 
 Using the exponential model of radioactive decay in Equation~\ref{eq:decay}, we used these counts over time to estimate the half life of \InMeta.
@@ -269,14 +293,14 @@ Experiment 3 was conducted at this lower voltage.\\
 
 \FloatBarrier\subsection{Dead Time Measurement}
 % Experiment 2
-The pulse output behavior of the GM Detector was measured and compared over prolonged exposure.
+The pulse output behavior of the detector was measured and compared over prolonged exposure.
 Using the Oscilloscope set to visualize signal traces, the combined trace of these signals compared in time to the signal before them can be seen in Figure~\ref{fig:exp2-osc-dead}.\\
 
 
 \begin{figure}
     \centering
     \includegraphics[width=\figwidth]{figs/Exp2_oscDeadTime.png}
-    \caption{Traces (faded yellow) of signals (bright yellow) from the GM Detector while exposed to the 30~\micCi~beta source.
+    \caption{Traces (faded yellow) of signals (bright yellow) from the GM detector while exposed to the 30~\micCi~beta source.
     Visualized using the Oscilloscope, with traces set to visible. 
     Note the gap after the initial signal peak, where following pulses did not leave a trace, followed by a ``recovery'' period in which following pulses were substantially attenuated.}
     \label{fig:exp2-osc-dead}
@@ -285,7 +309,7 @@ Using the Oscilloscope set to visualize signal traces, the combined trace of the
 Using the measure function of the Oscilloscope, we measured the dead time, where no followup pulse could be detected, to be $562\pm2~\mathrm{\mu s}$.
 Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 
-We measured three 60-second trials each of GM Detector counts while exposed to 1.0\micCi~source 1, 1.0\micCi~source 2 and 1.0\micCi~source 2 simultaneously, then 1.0\micCi~source 2 alone, for a total of nine trials.
+We measured three 60-second trials each of detector counts while exposed to 1.0~\micCi~source 1, 1.0~\micCi~source 2 and 1.0~\micCi~source 2 simultaneously, then 1.0~\micCi~source 2 alone, for a total of nine trials.
 For each set of 60-second counts $C_1, C_2, C_3$, we calculated a base count rate:
 \begin{equation}\label{eq:count-rate}
     m_0=\frac{C_1+C_2+C_3}{180~\mathrm{seconds}}
@@ -311,9 +335,9 @@ Thus, to calculate the net count rate and uncertainty for each source:
 
 From source 1 alone, we measured 60-second counts of 131, 118, and 124, yielding with Equations~\ref{eq:count-rate} through \ref{eq:new-uncertainty}, a count rate $m_1=1.756\pm0.112~\mathrm{s^{-1}}$.\\
 
-For sources 1 and 2 combined, we measured 60-second counts of 227, 216, and 226, yielding a count rate $m_{12}=3.400\pm0.147\mathrm{s^{-1}}$.\\
+For sources 1 and 2 combined, we measured 60-second counts of 227, 216, and 226, yielding a count rate $m_{12}=3.400\pm0.147~\mathrm{s^{-1}}$.\\
 
-Finally, for source 2 alone, we measured 60-second counts of 120, 137, and 106, yielding a count rate $m_2=1.700\pm0.111\mathrm{s^{-1}}$.\\
+Finally, for source 2 alone, we measured 60-second counts of 120, 137, and 106, yielding a count rate $m_2=1.700\pm0.111~\mathrm{s^{-1}}$.\\
 
 Using these rate measurements, we were able to estimate the dead time of the detector using Equation~\ref{eq:dead-time}:
 \begin{equation}\label{eq:dead-time}
@@ -359,7 +383,7 @@ The relative activity of the sample through these counts over time can be observ
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\figwidth]{figs/Exp3_in116-activity.png}
-    \caption{Relative activity (as measured by GM detector counts over 60 seconds) of the \InMeta source every 90 seconds over a period spanning 49.5 minutes.}
+    \caption{Relative activity (as measured by GM detector counts over 60 seconds) of the \InMeta~source every 90 seconds over a period spanning 49.5 minutes.}
     \label{fig:exp3-in116m}
 \end{figure}
 
@@ -382,7 +406,7 @@ In experiment~1, while we find a very suitable plateau in the change of count ra
 
 One motivation is to minimize the possible effect of variation in voltage supply.
 Under this motivation, a suitable voltage would be more towards the middle of the plateau, around $850$~V where we performed experiment~2.
-However, a second motivation would be to minimize \emph{any} effect of dead time on measurements for the same strength as the 1.0~\micCi source used for experiment 1, while allowing for observation of the effect with stronger sources.
+However, a second motivation would be to minimize \emph{any} effect of dead time on measurements for the same strength as the 1.0~\micCi!source used for experiment 1, while allowing for observation of the effect with stronger sources.
 This way, a clear distinction could be made between this measurement and a stronger one.
 This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
 
@@ -390,7 +414,7 @@ It is very possible that our results from experiment~2 demonstrate why a choice 
 While we were able to estimate the dead time of our detector if it were non-paralyzable using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
 Using the same data with the assumption that the detector was paralyzable still yielded a similar dead time estimation and uncertainty. ($9.303\pm34.904$~ms)\\
 % Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
-These estimates are highly different from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms and visually appears as expected such as in Figure~\ref{fig:int-dead-time}.
+These estimates, even if they were more confident, are highly different from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms and visually appears as expected such as in Figure~\ref{fig:int-dead-time}.
 Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still nearly an order of magnitude different from those calculated by the two source method.\\
 
 It is very possible, although not certain, that our selection of 850~V could have negatively impacted our estimate. 
@@ -398,44 +422,109 @@ As the purpose of comparing different source strengths is to compare the effect 
 If measurements for a single source fall around the start of that plateau, then we would expect dead time to have minimal effect while essentially still maximizing the comparative effect of dead time on the measurement of two sources simultaneously.\\
 
 In experiment 3, there was a stronger than expected noise in count rates which impacted our ability to estimate half life, as is most clear when viewing the measurements over time in Figure~\ref{fig:exp3-in116m}.
-Our half-life estimate of 63.606 minutes is comparable to the literature value of 54.29~minutes\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}, but not comfortably close, and the regression of our data we used to estimate this value only had a correlation of $R^2=0.806$.
-Another factor that definitely compounded with the noise present was the short time period over which our measurements were taken.
+Our half-life estimate of 63.606 minutes is comparable to the literature value of 54.290~minutes\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}, but not comfortably close, and the regression of our data we used to estimate this value only had a correlation of $R^2=0.806$.
+Another factor which may have compounded with the noise present was the short time period over which our measurements were taken.
 Due to time constraints from being required to manually perform measurements during class time, we were only able to perform measurements over a period of 49 minutes, not even a full half life of the material.
-Combined with noise, the exponential relationship itself is not even visually obvious without context that the data came from radioactive decay.
-A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing a confident and accurate estimate of decay rate.\\
+Combined with noise, the exponential relationship itself is not visually obvious without context that the data came from radioactive decay.
+A longer measurement period, perhaps by automating the measurement procedure, would likely have aided in producing a more confident and accurate estimate of decay rate.\\
 
-In addition to noise, it is also conceivable for dead time to affect such a measurement; if the high count rates were sufficiently more strongly impacted by dead time than by later measurements in the period, the early activity may not seem as relatively higher than later activity, resulting in a slightly suppressed estimate of decay rate.
+In addition to noise, it is also conceivable for dead time to affect such a measurement: if the high count rates were sufficiently more strongly impacted by dead time than by later measurements in the period, the early activity may not seem as relatively high in comparison to later activity, resulting in a slightly suppressed estimate of decay rate.
 
 %  $562\pm2~\mathrm{\mu s}$.
 % Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 \FloatBarrier\section{Conclusions}\label{sec:conc}
 The laboratory was broadly successful, but not without qualification.\\
 
-A ``counting curve'' of count rates measured under different voltage supplies to the GM detector was successfully constructed and used to discuss and select an appropriate voltage supply, but it is very possible that the delay in final selection may have negatively impacted experiment 2.
+A ``counting curve'' of count rates measured under different voltage supplies to the GM detector was successfully constructed and used to discuss and select an appropriate voltage supply, but it is very possible that the delay in final selection may have negatively impacted experiment 2.\\
 
-The impact of dead time on GM detector usage was clearly observed, but due to uncertainty of count rates the estimates of dead time using the two source method were insufficiently precise to suggest whether the detector more closely followed a paralyzable or non-paralyzable model, with estimates under both models being far closer to each other than the third estimate performed using the oscilloscope trace. ($9.460\pm36.700$~ms under a non-paralyzable model, $9.303\pm34.904$~ms under a paralyzable model, vs. a dead time of $0.562\pm0.002$~ms and recovery time of $1.384\pm0.002$~ms measured using the oscilloscope trace).
+The impact of dead time on GM detector usage was clearly observed, but due to uncertainty of count rates the estimates of dead time using the two source method were insufficiently precise to suggest whether the detector more closely followed a paralyzable or non-paralyzable model, with estimates under both models being both unusably uncertain and far closer to each other than the third estimate performed using the oscilloscope trace. ($9.460\pm36.700$~ms under a non-paralyzable model, $9.303\pm34.904$~ms under a paralyzable model, vs. a dead time of $0.562\pm0.002$~ms and recovery time of $1.384\pm0.002$~ms measured using the oscilloscope trace).
 In future experiments, longer measurement of sources and background would likely yield much lower uncertainty, and potentially confident enough estimates of dead time to make meaningful distinction between which model suits a detector better.\\
 
-A half-life, comparable in magnitude to literature value, was successfully estimated of \InMeta~using the counts taken over 49 minutes.
-However, the count data were undesirably noisy, limiting confidence in the regression used to estimate half-life. In future experiments, a viable solution may simply be to observe such a sample for longer, allowing the observation of a much more substantial reduction in activity.
+A half-life of 63.606 minutes, comparable in magnitude to literature value of 54.290~minutes, was successfully estimated of \InMeta~using the counts taken over 49 minutes.
+However, the count data were undesirably noisy, limiting confidence in the regression used to estimate half-life. In future experiments, a viable solution may be to observe such a sample for longer, allowing the observation of a much more substantial reduction in activity.
 
 
 \appendix
 \pagebreak
 \FloatBarrier\section{Equipment Details}\label{app:equip}
-In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{tab:equip}
+In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{tab:equip}.
 
 \newcommand{\na}{$N/A$}
-\begin{table}[!htb]
+\newcommand{\sref}[1]{$^{\ref{#1}}$}
+\FloatBarrier
+Further details of equipment are listed in Table~\ref{tab:equip}.
+Where a detail could not be identified for a given device, it is replaced with ``\na''.
+\begin{table}[!h]
     \centering
-    \caption{Details of the equipment used in this laboratory.
-    Where a detail could not be identified for a given device, it is replaced with ``\na''.}\label{tab:equip}
-    \begin{tabular}{c|ccc}
-        Item & Serial Number & Manufacturer & Address \\
+    \small
+    \caption{Details of the equipment used in this laboratory.}
+    \label{tab:equip}
+    \scriptsize
+    \begin{tabular}{c|cccc}
+        Item & Manufacturer & Model & ID Type & ID Number\\\hline
+        Module rack & Canberra (now Mirion)\sref{addr:mirion}& Model 2000 & Inventory \# & NE759377 \\
+        Geiger-Muller Detector & \na & \na & \na & \na \\
+        GM Pulse Inverter & Spectrum Techniques\sref{addr:spect} & 2017 GPI & \na & \na \\
+        % Multichannel Analyzer & Ortec\sref{addr:ortec} & EasyMCA & Inventory \# & P10F79090 \\
+        Weak Source 1 & Spectrum Techniques\sref{addr:spect} & 1.0\micCi ~$^{137}$Cs Beta Source & Date & Sep. 2017 \\
+        Weak Source 2 & Spectrum Techniques\sref{addr:spect} & 1.0\micCi ~$^{137}$Cs Beta Source & Date & Sep. 2017 \\
+        Strong Source & Eckert and Ziegler\sref{addr:eck-zieg} & 30\micCi~$^{137}Cs$ Beta Source & Date & Sep. 2017 \\
+        \InMeta~Source & \na & Irradiated Indium Foil & Date & Feb. 2026 \\
+        High Voltage Power Supply & Caen\sref{addr:caen} & N1470AL & Inventory \# & P10G96054 \\
+        % Pulser & Ortec\sref{addr:ortec} & Model 480 & \na & \na \\
+        Oscilloscope & Keysight\sref{addr:keys} & Infiniivision DSO-X 2002A & Inventory \# & P10R03513 \\
+        Counter & Ortec\sref{addr:ortec} & Model 871 & Serial \# & 1024 \\
+        % Preamplifier & Ortec\sref{addr:ortec} & Model 142PC & Serial \# & 2780r17 \\
+        Amplifier & Ortec\sref{addr:ortec} & Model 590A & Serial \# & 16076205 \\
+        Computer & Dell\sref{addr:dell} & Precision 360 & Eng. IT ID \# & EWS 20426 \\
 
     \end{tabular}
-
+    \begin{enumerate}[label=\alph*]
+        \item\label{addr:mirion}
+        Mirion Technologies, Inc.:
+        1218 Menlo Drive,
+        Atlanta, GA;
+        Phone: 770.432.2744;
+        \url{https://ir.mirion.com/}
+        \item\label{addr:spect}
+        Spectrum Techniques:
+        106 Union Valley Rd, Oak Ridge, TN 37830;
+        Phone: 865.482.9937;
+        \url{https://www.spectrumtechniques.com/}
+        \item\label{addr:eck-zieg}
+        Eckert \& Ziegler Isotope Products:
+        24937 Avenue Tibbitts, Valencia, CA 91355;
+        Phone: +1 866 476-9767;
+        \url{https://isotopeproducts.com/}
+        \item\label{addr:caen}
+        Caen Sp.A.:
+        Via della Vetraia, 11, 55049 Viareggio LU - Italy;
+        Phone: +39 0584 388398;
+        \url{https://www.caen.it/}
+        \item\label{addr:keys}
+        Keysight Technologies: 
+        1900 Garden of the Gods Road, Colorado Springs, CO 80907-3423 United States;
+        Phone: 1 800 829-4444;
+        \url{https://www.keysight.com}
+        \item\label{addr:ortec}
+        Advanced Measurement Technology:
+        801 South Illinois Avenue,
+        Oak Ridge, Tennessee 37830,
+        United States;
+        Phone: +1.865.482.4411;
+        Fax: +1.865.483.0396;
+        \url{https://www.ortec-online.com};
+        Email: ortec.info@ametek.com
+        \item\label{addr:dell}
+        Dell Technologies:
+        Dell Technologies
+        1 Dell Way
+        Round Rock, TX 78664.;
+        Phone: 1-877-275-3355;
+        \url{https://www.dell.com/en-us/lp/contact-us}
+    \end{enumerate}
 \end{table}
+\FloatBarrier
 
 \section{Paralyzable Model Calculations}\label{app:para-script}
 The following \texttt{Python} script using the module \texttt{numpy} was used to solve for the dead time of a paralyzable detector using the two source method.
@@ -460,7 +549,7 @@ def find_n(m, dead_time):
         n = (n_max + n_min) / 2
         new_m = n*np.exp(-n*t)
 
-        if (new_m > m): # That n was too high, because it should result in a lower count rate than what we actually observed
+        if (new_m > m):
             n_max = n
         else:
             n_min = n
