@@ -43,7 +43,7 @@ When performing an experiment, one must, in lieu of being able to directly perce
 Ionizing radiation can then interact with this gas, initiating an avalanche connecting the two conductive components.
 While this design has advantages in sensitivity if precise readings of energy are not needed, proper use requires an understanding of its limitations, and especially a phenomenon known as ``dead time'' which alters observations from the true radioactive phenomena.\\
 
-This laboratory investigates more closely the dead time behavior of a GM detector, comparing its response to sources of different strength and decay rates.
+This laboratory investigates more closely the dead time behavior of a GM detector and decay in general, comparing the detector's response to sources of different strength and decay rates.
 
 \subsection{Dead Time and Paralyzability}
 No detector's response to an event would be a perfectly instantaneous signal, instead having at least some period after the event where future responses are affected.\\
@@ -56,13 +56,13 @@ These phenomena are illustrated in Figure~\ref{fig:int-dead-time}.\\
     \centering
     \includegraphics[width=\figwidth]{figs/Int0_deadTime.png}
     \caption{The dead time and recovery time of a GM counter. Illustration from Measurement and Detection of Radiation.\cite{tsoulfanidis_measurement_2015}}
-    \caption{fig:int-dead-time}
+    \label{fig:int-dead-time}
 \end{figure}
 
 For a detector with a given dead time limitation, one way to categorize its response behavior is as paralyzable or non-paralyzable.
 
 A perfectly non-paralyzable detector would be cleanly unaffected by subsequent events during the dead time.
-Thus no matter how rapidly events occur, the detector will never become oversaturated or register events faster than $1/\tau$, where $\tau$ is the dead time of the detector.
+Thus no matter how rapidly events occur, the detector will never become oversaturated or register events faster than $\tau^{-1}$, where $\tau$ is the dead time of the detector.
 That is, it cannot be ``paralyzed''.\\
 
 In contrast, a perfectly paralyzable detector is still affected by new events which interact during the original dead time.
@@ -141,11 +141,13 @@ The weak sources may be seen next to the detector in Figure~\ref{fig:mat-weak12}
     \centering
     \includegraphics[width=\figwidth]{figs/Mat3_weak12.jpg}
     \caption{Weak sources 1 and 2 positioned in front of the detector, as performed in experiment~2.}
-    \caption{fig:mat-weak12}
+    \label{fig:mat-weak12}
 \end{figure}
 
 We additionally used a 30~\micCi~$^{137}$Cs beta radiation source, henceforth known as the strong source.
-The strong source may be seen in Figure~\ref{fig:mat-strong}.
+The strong source may be seen in Figure~\ref{fig:mat-strong}.\\
+
+Finally, we used a source of \InMeta, in indium foil irradiated using a PuBe source until just prior to experiments.
 
 \begin{figure}
     \centering
@@ -170,26 +172,84 @@ We used an Ortec Model 871 Timer-Counter, which will henceforth be referred to a
 
 We used an Ortec Model 590A Amplifier and Timing Single Channel Analyzer, henceforth referred to as the amplifier.
 
-\subsection{Experiment 1: Measurement of the Counting Curve}
+\FloatBarrier\subsection{Experiment 1: Measurement of the Counting Curve}
 
-As previewed in Figure~\ref{fig:mat-setup}
+As previewed in Figure~\ref{fig:mat-setup}, we arranged the equipment into the setup described by Figure~\ref{fig:mat-exp-diagram}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\figwidth]{figs/Mat6_exp1.png}
+    \caption{A diagram of the system used for all three experiments, courtesy of the manual.\cite{npre_lab_3_manual_2025}. The oscilloscope is shown connected with a dashed line, as it is used for verification, but aside from experiment 2 is not core to the experiments themselves.}
+    \label{fig:mat-exp-diagram}
+\end{figure}
+
+After obtaining a weak source from the TA, we ensured both that the power supply was set to 0~V and that there was no cap on the detector, before placing the strong source directly in front of it using tape to center its face against the tip.\\
+
+We then set the counter to 30 seconds and measured counts over this period with the 0~V bias setting, before steadily ramping up voltage until pulses were counted by the counter within a 30 second timespan.
+To adjust the voltage of the power supply, we used the adjustment knob seen in Figure~\ref{fig:mat-hvps}.
+We pressed the knob inwards to toggle between editing a digit or setting and selecting between different digits to edit.
+In the latter mode, rotating the knob scrolled between the different digits of the voltage target (displayed as ``VSET''), or over the ``VSET'' label itself.
+In the former mode over a digit, scrolling the knob adjusted the value of that digit, while changing mode over the ``VSET'' option instead switched between being able to edit target voltage and the power supply ramping up current voltage to the target.\\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.3\linewidth]{figs/Mat1_hvps.jpg}
+    \caption{The front panel of the adjustable high voltage power supply. Note the display of current voltage under ``VMON'' and target voltage ``VSET'' above the adjustment knob.}
+    \label{fig:mat-hvps}
+\end{figure}
+
+After identifying the voltage at which the counter began to record signals, and reduced the bias by approximately 100~V.
+We then increased voltage by 10~V increments while recording 30-second counts, until a plateau was observed where increasing voltage had substantially less effect on observed counts.
+From that point, we increased bias and recorded in 50~V increments until count rates began to dramatically increase again with respect to voltage increase, additionally preparing not to continue either past 1300~V or if the detector began making a clicking sound.\\
+
+We then used the data from this experiment to select a suitable operating voltage in future experiments.
+
+\FloatBarrier\subsection{Experiment 2: Dead Time Measurement}
+
+In experiment 2, using the same experimental setup seen in Figure~\ref{fig:mat-exp-diagram}, we measured count rates for combinations of the two weak sources to estimate dead time.\\
+
+First, we removed any sources from near the detector, and recorded detector counts of background radiation over a 5 minute period.\\
+
+We then arranged the strong source near the detector, and viewed signal reception from the amplifier on the oscilloscope.
+We turned the trace on, pressing the display button to bring up an option for ``persistence'' over the five display buttons, pressing this persistence button to turn on a trace of prior waveforms.
+Using this trace and the measure functions of the oscilloscope we estimated the dead time and recovery time of the detector.\\
+
+We then used the two source method to estimate the dead time of the detector.
+For each of three combinations of weak sources, we performed three 30-second counts and compared with background rate to form an observed count rate $m_i$.
+We took these measurements for weak source 1 alone, $m_1$, weak sources 1 and 2 together, $m_{12}$, then weak source 2 alone, $m_2$.
+To minimize deviation between the true combined rate $n_{12}$ and the sum of for the sources individually ($n_1, n_2$), we ensured to add source 2 without moving source 1, as closely to equidistant as possible, which can be seen in Figure~\ref{fig:mat-weak12}, and removed weak source 1 without adjusting 2 for its observation alone.\\
+
+Using these estimates and Equations~\ref{eq:non-paralyzable} and \ref{eq:paralyzable}, we estimated dead time and error thereof for the detector.
+
+\FloatBarrier\subsection{Experiment 3: Radioactive Decay}
+
+Once again using the same experimental setup, we observed the radioactive decay of a sample of metastable indium 116 (\InMeta).\\
+
+We set the counter to record counts over periods of 60 seconds.\\
+
+Having previously ensured at the start of the lab that a sample of indium foil was being irradiated using a PuBe source, we received such a sample from the TA, and immediately placed it next to the detector.
+We then performed a series of 60-second count observations every 90 seconds (yielding 30 seconds to record data), repeating for 49 minutes to observe the decline in activity of the sample.\\
+
+Using the exponential model of radioactive decay in Equation~\ref{eq:decay}, we used these counts over time to estimate the half life of \InMeta.
 
 
-\section{Experimental Results}\label{sec:results}
+
+
+\FloatBarrier\section{Experimental Results}\label{sec:results}
 After performing the above procedures, we observed the following results:
 
 %%%% Experiment 1
-\subsection{Experiment 1: Measurement of the Counting Curve}
+\FloatBarrier\subsection{Experiment 1: Measurement of the Counting Curve}
 % Plot the counting curve for the GM counter. Report the plateau slope.
-For a range of voltage bias settings, we measured detector pulses successfully recorded over 30-second periods with a $0.1$~.
+For a range of voltage bias settings, we measured detector pulses successfully recorded over 30-second periods with a $1.0$~\micCi~source.
 These counts are compared to the biases used in Figure~\ref{fig:exp1-bias-v-counts}.
-As expected, the measured counts begin to plateau around 700V, before increasing rapidly with increased voltage after 950V.
+As expected, the measured counts begin to plateau around 700~V, before increasing rapidly with increased voltage after 950~V.
 This plateau region had a slope of approximately 0.680 counts for every additional volt of increased bias.\\
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=\figwidth]{figs/Exp1_counts-v-volt.png}
-    \caption{Radiation counts for a 1.0~\micCi~source measured by the GM detector over 30 second intervals with the Power Supply set to various voltages.
+    \caption{Radiation counts for a 1.0~\micCi~source measured by the GM detector over 30 second intervals with the power supply set to various voltages.
     A plateau region is observed, with a slope of 0.680 counts per volt of bias increase.}
     \label{fig:exp1-bias-v-counts}
 \end{figure}
@@ -197,17 +257,17 @@ This plateau region had a slope of approximately 0.680 counts for every addition
 Based on this voltage behavior, we selected an appropriate operating voltage for further experiments.
 Two factors motivated our choice, resulting in two different voltage choices for experiments 2 and 3.
 Given potential uncertainty in voltage supply, a stable count rate was desired with respect to changes in voltage.
-Following this motivation, we chose a voltage of 850V, a point closer to the center of the plateau on Figure~\ref{fig:exp1-bias-v-counts}, where we visually judged the slope to be the least.
+Following this motivation, we chose a voltage of 850~V, a point closer to the center of the plateau on Figure~\ref{fig:exp1-bias-v-counts}, where we visually judged the slope to be the least.
 This voltage was used for experiment 2.\\
 
 Our second motivation was to minimize the effect of dead time on measurements.
-Optimizing for this motivation, an appropriate voltage might be one at the start of the plateau (in our case 700V), to achieve a high count rate without drastically raising the rate of count loss due to dead time.\\
+Optimizing for this motivation, an appropriate voltage might be one at the start of the plateau (in our case 700~V), to achieve a high count rate without drastically raising the rate of count loss due to dead time.\\
 
-Between experiment 2 and experiment 3, upon feedback from the professor we decided to instead prioritize minimal dead time loss, and changed our voltage supply bias to 700V. 
+Between experiment 2 and experiment 3, upon feedback from the professor we decided to instead prioritize minimal dead time loss, and changed our voltage supply bias to 700~V. 
 Experiment 3 was conducted at this lower voltage.\\
 
 
-\subsection{Dead Time Measurement}
+\FloatBarrier\subsection{Dead Time Measurement}
 % Experiment 2
 The pulse output behavior of the GM Detector was measured and compared over prolonged exposure.
 Using the Oscilloscope set to visualize signal traces, the combined trace of these signals compared in time to the signal before them can be seen in Figure~\ref{fig:exp2-osc-dead}.\\
@@ -225,7 +285,7 @@ Using the Oscilloscope set to visualize signal traces, the combined trace of the
 Using the measure function of the Oscilloscope, we measured the dead time, where no followup pulse could be detected, to be $562\pm2~\mathrm{\mu s}$.
 Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 
-We measured three 60-second trials each of GM Detector counts while exposed to 1\micCi~source 1, 1\micCi~source 2 and 1\micCi~source 2 simultaneously, then 1\micCi~source 2 alone, for a total of nine trials.
+We measured three 60-second trials each of GM Detector counts while exposed to 1.0\micCi~source 1, 1.0\micCi~source 2 and 1.0\micCi~source 2 simultaneously, then 1.0\micCi~source 2 alone, for a total of nine trials.
 For each set of 60-second counts $C_1, C_2, C_3$, we calculated a base count rate:
 \begin{equation}\label{eq:count-rate}
     m_0=\frac{C_1+C_2+C_3}{180~\mathrm{seconds}}
@@ -326,11 +386,11 @@ However, a second motivation would be to minimize \emph{any} effect of dead time
 This way, a clear distinction could be made between this measurement and a stronger one.
 This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
 
-It is very possible that our results from experiment~2 demonstrate why a choice of 700~V would be superior.
+It is very possible that our results from experiment~2 demonstrate why a choice of 700~V could be superior.
 While we were able to estimate the dead time of our detector if it were non-paralyzable using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
 Using the same data with the assumption that the detector was paralyzable still yielded a similar dead time estimation and uncertainty. ($9.303\pm34.904$~ms)\\
 % Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
-These estimates are highly different from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
+These estimates are highly different from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms and visually appears as expected such as in Figure~\ref{fig:int-dead-time}.
 Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still nearly an order of magnitude different from those calculated by the two source method.\\
 
 It is very possible, although not certain, that our selection of 850~V could have negatively impacted our estimate. 
@@ -348,14 +408,25 @@ In addition to noise, it is also conceivable for dead time to affect such a meas
 
 %  $562\pm2~\mathrm{\mu s}$.
 % Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
-\section{Conclusions}\label{sec:conc}
+\FloatBarrier\section{Conclusions}\label{sec:conc}
+The laboratory was broadly successful, but not without qualification.\\
+
+A ``counting curve'' of count rates measured under different voltage supplies to the GM detector was successfully constructed and used to discuss and select an appropriate voltage supply, but it is very possible that the delay in final selection may have negatively impacted experiment 2.
+
+The impact of dead time on GM detector usage was clearly observed, but due to uncertainty of count rates the estimates of dead time using the two source method were insufficiently precise to suggest whether the detector more closely followed a paralyzable or non-paralyzable model, with estimates under both models being far closer to each other than the third estimate performed using the oscilloscope trace. ($9.460\pm36.700$~ms under a non-paralyzable model, $9.303\pm34.904$~ms under a paralyzable model, vs. a dead time of $0.562\pm0.002$~ms and recovery time of $1.384\pm0.002$~ms measured using the oscilloscope trace).
+In future experiments, longer measurement of sources and background would likely yield much lower uncertainty, and potentially confident enough estimates of dead time to make meaningful distinction between which model suits a detector better.\\
+
+A half-life, comparable in magnitude to literature value, was successfully estimated of \InMeta~using the counts taken over 49 minutes.
+However, the count data were undesirably noisy, limiting confidence in the regression used to estimate half-life. In future experiments, a viable solution may simply be to observe such a sample for longer, allowing the observation of a much more substantial reduction in activity.
+
 
 \appendix
-\section{Equipment Details}\label{app:equip}
+\pagebreak
+\FloatBarrier\section{Equipment Details}\label{app:equip}
 In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{tab:equip}
 
 \newcommand{\na}{$N/A$}
-\begin{table}
+\begin{table}[!htb]
     \centering
     \caption{Details of the equipment used in this laboratory.
     Where a detail could not be identified for a given device, it is replaced with ``\na''.}\label{tab:equip}
@@ -367,7 +438,8 @@ In order to better replicate experiments and identify issues, the details of eac
 \end{table}
 
 \section{Paralyzable Model Calculations}\label{app:para-script}
-The following \texttt{Python} script using the module \texttt{numpy} was used to solve for the dead time of a paralyzable detector using the two source method:
+The following \texttt{Python} script using the module \texttt{numpy} was used to solve for the dead time of a paralyzable detector using the two source method.
+This script assumes that the given count rate is less than the reciprocal of dead time $\tau^{-1}$, where observed count rate begins to decline.
 \begin{verbatim}
 import numpy as np
 
@@ -453,5 +525,6 @@ print(f'Dead time error: {ET}')
 \end{verbatim}
 
 % \bibliographystyle{sty/ieeetran}
+\pagebreak
 \printbibliography
 \end{document}
