@@ -44,7 +44,7 @@ Using a 30.0~\micCi~\CsSrc~beta source, we visually observed the dead time and r
 Using two 1.0~\micCi~\CsSrc~beta sources (over three 60-second measurements of each source alone and the two combined, against a 5-minute background measurement), we performed a two-source  assessment of dead time under both ideally paralyzable and non-paralyzable models of the detector.
 Using the same detector, we measured 60-second counts every 90 seconds of an \InMeta~foil source over a period of 49 minutes to make an estimate of the isotope's half life.\\
 
-We observed a plateau of count rate with respect to operating voltage between approximately 700~V and 900~V, and used to eventually select an operating voltage of 700~V.
+We observed a plateau of count rate with respect to operating voltage with a slope of 0.680 counts per volt between approximately 700~V and 900~V, and used this to eventually select an operating voltage of 700~V.
 Using the 30.0~\micCi~source and the oscilloscope trace, we found a dead time of $562\pm2~\mathrm{\mu s}$.
 Using the two-source method with the two 1.0~\micCi~sources, we estimated potential dead times of $9.460\pm36.700$~ms under a non-paralyzable model of the detector and $9.303\pm34.904$~ms under a detectable model, yielding little insight about the paralyzability of the detector.
 Using a linear regression of correlation $R^2=0.806$, we estimated the half life of~\InMeta~to be 63.606 minutes.\\
@@ -70,7 +70,7 @@ These phenomena are illustrated in Figure~\ref{fig:int-dead-time}.\\
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\figwidth]{figs/Int0_deadTime.png}
+    \includegraphics[width=0.4\linewidth]{figs/Int0_deadTime2.png}
     \caption{The dead time and recovery time of a GM counter. Illustration from Measurement and Detection of Radiation.\cite{tsoulfanidis_measurement_2015}}
     \label{fig:int-dead-time}
 \end{figure}
@@ -410,7 +410,7 @@ However, a second motivation would be to minimize \emph{any} effect of dead time
 This way, a clear distinction could be made between this measurement and a stronger one.
 This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
 
-It is very possible that our results from experiment~2 demonstrate why a choice of 700~V could be superior.
+It is very possible that our results from experiment~2 demonstrate why a choice of 700~V could be superior, although it is also possible that the short timespan of measurements played the dominant role in the degree of uncertainty of our two-source estimates of dead time.
 While we were able to estimate the dead time of our detector if it were non-paralyzable using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
 Using the same data with the assumption that the detector was paralyzable still yielded a similar dead time estimation and uncertainty. ($9.303\pm34.904$~ms)\\
 % Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
