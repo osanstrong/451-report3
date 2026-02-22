@@ -24,13 +24,13 @@
 \usepackage{placeins} % FloatBarrier
 \usepackage{amsmath} % align
 \usepackage{xcolor}
-\usepackage[colorlinks=true, citecolor=violet, linkcolor=black, urlcolor=violet]{hyperref}
+\usepackage[colorlinks=true, citecolor=violet, linkcolor=violet, urlcolor=violet]{hyperref}
 
 \begin{document}
 \pagenumbering{gobble}
 \maketitle
 \pagebreak
-\tableofcontents
+{\hypersetup{linkcolor=black}\tableofcontents}
 \pagebreak
 \pagenumbering{arabic}
 \begin{abstract}
@@ -38,6 +38,56 @@
 \end{abstract}
 
 \section{Introduction and Background}
+A key aspect of working with radiation is properly using the instruments which detect it.
+When performing an experiment, one must, in lieu of being able to directly perceive radioactive phenomena, rely on a consistent detector, such as a Geiger-Muller (GM) detector, which houses a thin gas between conductive casing and an internal electrode.
+Ionizing radiation can then interact with this gas, initiating an avalanche connecting the two conductive components.
+While this design has advantages in sensitivity if precise readings of energy are not needed, proper use requires an understanding of its limitations, and especially a phenomenon known as ``dead time'' which alters observations from the true radioactive phenomena.\\
+
+This laboratory investigates more closely the dead time behavior of a GM detector, comparing its response to sources of different strength and decay rates.
+
+\subsection{Dead Time and Paralyzability}
+No detector's response to an event would be a perfectly instantaneous signal, instead having at least some period after the event where future responses are affected.\\
+
+In the case of the GM detector, a ``dead time'' is observed after the response to a pulse, where the positive ions resulting from the charge avalanche temporarily shield the electrode, preventing a subsequent event from being registered by the detector.\cite{tsoulfanidis_measurement_2015}
+Extending beyond the dead time remains a recovery period where the gas begins to dissipate, but a subsequent pulse would still be substantially reduced in magnitude.
+These phenomena are illustrated in Figure~\ref{fig:int-dead-time}.\\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\figwidth]{figs/Int0_deadTime.png}
+    \caption{The dead time and recovery time of a GM counter. Illustration from Measurement and Detection of Radiation.\cite{tsoulfanidis_measurement_2015}}
+    \caption{fig:int-dead-time}
+\end{figure}
+
+For a detector with a given dead time limitation, one way to categorize its response behavior is as paralyzable or non-paralyzable.
+
+A perfectly non-paralyzable detector would be cleanly unaffected by subsequent events during the dead time.
+Thus no matter how rapidly events occur, the detector will never become oversaturated or register events faster than $1/\tau$, where $\tau$ is the dead time of the detector.
+That is, it cannot be ``paralyzed''.\\
+
+In contrast, a perfectly paralyzable detector is still affected by new events which interact during the original dead time.
+While with effective data analysis this might yield information about counts within that dead time, in practice this can also be a disadvantage, allowing the detector to stay ``paralyzed'', fully saturated and never exiting the dead time period to properly signal new events.\\
+
+For a non-paralyzable detector of dead time $\tau$, the relationship between true count $n$ and observed count $m$ may be modeled\cite{tsoulfanidis_measurement_2015}:
+\begin{equation}\label{eq:non-paralyzable}
+    m=\frac{n}{1+n\tau}
+\end{equation}
+Whereas, for a paralyzable detector, the relationship could be modeled:
+\begin{equation}\label{eq:paralyzable}
+    m=ne^{-n\tau}
+\end{equation}
+
+In both models, measuring observed decay rates $m_1, m_2, m_{12}$ of unknown true average rates $n_1, n_2, n_{12}$, where it is at least known $n_{12}=n_1+n_2$, is enough to estimate the dead time $\tau$.
+This would be accomplished by measuring rates of response to two individual sources before measuring response to both combined, and is known as the two-source method.\cite{npre_lab_3_manual_2025}\\
+
+The non-paralyzable model can be solved analytically for an estimate of dead time:
+\begin{equation}\label{eq:dead-time-0}
+    \tau(m_1,m_{12},m_2)=\frac{1-\sqrt{1-\frac{m_{12}\left(m_1+m_2-m_{12}\right)}{m_1m_2}}}{m_{12}}
+\end{equation}
+However, the paralyzable model lacks such a closed-form solution\cite{npre_lab_3_manual_2025}, and must instead be solved using iterative techniques.
+
+In reality, no detector could be perfectly modeled by either assumption, and would likely fall somewhere in between.
+Instead, by comparing estimates of dead time using either model to an independent estimate of dead time, one might quantify how close a detector is to being modeled by one or the other.
 
 
 \subsection{Half Life and activity}
@@ -63,6 +113,68 @@ The half life represents the amount of time after which half of the original sam
 This quantity is readily available for most radioactive species in data collections such as those published by the Korean Atomic Energy Research Institute.\cite{noauthor_atomkaerirekrcgi-binnuclidenucin116_nodate}
 
 \section{Experimental Procedure}\label{sec:methods}
+
+In this section, we detail the equipment used and the experiments performed in this laboratory.
+Further equipment details may be found in Appendix~\ref{app:equip}, while Figure~\ref{fig:mat-setup} displays the setup.\\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\figwidth]{figs/Mat0_setup2.png}
+    \caption{The equipment setup used for this laboratory.}
+    \label{fig:mat-setup}
+\end{figure}
+
+\subsection{Equipment}
+In this laboratory, we employed the following equipment:
+
+\subsubsection{Module Rack}
+
+We used a Canberra Model 2000 Module Rack. This component will be henceforth referred to as the module rack.
+
+\subsubsection{Geiger-Muller Detector}
+In this laboratory, we used a GM Detector, henceforth referred to as the detector, accompanied by a Spectrum Techniques GPI GM Pulse Inverter.
+
+\subsubsection{Radiation Sources}
+In this laboratory, we used two 2017 1.0 \micCi~$^{137}$Cs beta radiation sources, referred to as weak sources 1 and 2.
+The weak sources may be seen next to the detector in Figure~\ref{fig:mat-weak12}. \\
+\begin{figure}
+    \centering
+    \includegraphics[width=\figwidth]{figs/Mat3_weak12.jpg}
+    \caption{Weak sources 1 and 2 positioned in front of the detector, as performed in experiment~2.}
+    \caption{fig:mat-weak12}
+\end{figure}
+
+We additionally used a 30~\micCi~$^{137}$Cs beta radiation source, henceforth known as the strong source.
+The strong source may be seen in Figure~\ref{fig:mat-strong}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\figwidth]{figs/Mat4_StrongSource.jpg}
+    \caption{The strong source, positioned in front of the detector as in experiment~1.}
+    \label{fig:mat-strong}
+\end{figure}
+
+\subsubsection{Programmable Power Supply}
+To supply the detector and its inverter, we used a Caen N1470AL 2CH High Voltage Programmable Power Supply, henceforth referred to as the power supply.
+
+\subsubsection{Oscilloscope}
+
+In this laboratory, we used an Infiniivision DSO-X 2002A Oscilloscope.
+The particular oscilloscope used in this experiment will henceforth be referred to as the oscilloscope.
+
+\subsubsection{Counter}
+
+We used an Ortec Model 871 Timer-Counter, which will henceforth be referred to as the counter.
+
+\subsubsection{Amplifier}
+
+We used an Ortec Model 590A Amplifier and Timing Single Channel Analyzer, henceforth referred to as the amplifier.
+
+\subsection{Experiment 1: Measurement of the Counting Curve}
+
+As previewed in Figure~\ref{fig:mat-setup}
+
+
 \section{Experimental Results}\label{sec:results}
 After performing the above procedures, we observed the following results:
 
@@ -103,8 +215,8 @@ Using the Oscilloscope set to visualize signal traces, the combined trace of the
 
 \begin{figure}
     \centering
-    \includegraphics[width=\figwidth]{figs/Exp2_oscDeadTime.jpg}
-    \caption{Traces #LABEL ON FIGURE# (faded yellow) of signals (bright yellow) from the GM Detector while exposed to the 30~\micCi~beta source.
+    \includegraphics[width=\figwidth]{figs/Exp2_oscDeadTime.png}
+    \caption{Traces (faded yellow) of signals (bright yellow) from the GM Detector while exposed to the 30~\micCi~beta source.
     Visualized using the Oscilloscope, with traces set to visible. 
     Note the gap after the initial signal peak, where following pulses did not leave a trace, followed by a ``recovery'' period in which following pulses were substantially attenuated.}
     \label{fig:exp2-osc-dead}
@@ -168,7 +280,10 @@ we calculated the uncertainty of the dead time $\tau$ as a function of $m_1$, $m
 \end{equation}
 
 Using Equations~\ref{eq:dead-time} through \ref{eq:t-unc}, we calculated a dead time of $9.460\pm36.700$~ms.
-Demonstrations of our full numerical calculations may be found at \url{https://www.desmos.com/calculator/6eplmvfm3o}.
+Demonstrations of our full numerical calculations may be found at \url{https://www.desmos.com/calculator/6eplmvfm3o}.\\
+
+As the paralyzable model of Equation~\ref{eq:paralyzable} lacks a closed form solution, we constructed an iterative script in \texttt{Python} to estimate dead time under the paralyzable model for the given observed count rates, and the derivatives of this estimate with respect to each rate.
+This script is included in Appendix~\ref{app:para-script}, and using it, we calculated a dead time of $9.303\pm34.904$~ms.
 % What the counts were, associated rates and uncertainty were
 % Set up system of equations for dead time of detector usning the two sources that we assume are equal using their gross count rates
 % Solve for associated uncertainty Do we show formula for that?
@@ -212,9 +327,11 @@ This way, a clear distinction could be made between this measurement and a stron
 This would prompt choice of an operating voltage closer to the start of the peak, around $700$~V, as was used to perform experiment~3.\\
 
 It is very possible that our results from experiment~2 demonstrate why a choice of 700~V would be superior.
-While we were able to estimate the dead time of our detector using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
-Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
-Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still nearly an order of magnitude different than that calculated by the two source method.\\
+While we were able to estimate the dead time of our detector if it were non-paralyzable using the measurements of sources~1 alone, 1 and 2, and 2 alone (at 9.460~ms), the uncertainty of this estimate ($\mathrm{\pm 36.700}$~ms) far exceeded the magnitude of that estimate.
+Using the same data with the assumption that the detector was paralyzable still yielded a similar dead time estimation and uncertainty. ($9.303\pm34.904$~ms)\\
+% Additionally, even before calculating the uncertainty of this estimate, the two source estimate of 9.460~ms was a different order of magnitude from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
+These estimates are highly different from the dead time observed using the oscilloscope trace in Figure~\ref{fig:exp2-osc-dead}, which we estimated to be $0.562\pm0.002$~ms.
+Even judging conservatively, assuming that pulses would not be properly counted until 95\% recovery, this would yield a recovery time from the same trace of Figure~\ref{fig:exp2-osc-dead} of $1.384\pm0.002$~ms, still nearly an order of magnitude different from those calculated by the two source method.\\
 
 It is very possible, although not certain, that our selection of 850~V could have negatively impacted our estimate. 
 As the purpose of comparing different source strengths is to compare the effect of dead time on count rates (with the formula simply being an abstraction of this to take three measurements and yield a dead time), an ideal measurement may have been taken at the start of the plateau for the strength of just one source, around 700~V in Figure~\ref{fig:exp1-bias-v-counts}.
@@ -225,14 +342,16 @@ Our half-life estimate of 63.606 minutes is comparable to the literature value o
 Another factor that definitely compounded with the noise present was the short time period over which our measurements were taken.
 Due to time constraints from being required to manually perform measurements during class time, we were only able to perform measurements over a period of 49 minutes, not even a full half life of the material.
 Combined with noise, the exponential relationship itself is not even visually obvious without context that the data came from radioactive decay.
-A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing a confident and accurate estimate of decay rate.
+A longer measurement period, perhaps by automating the measurement procedure, would likely have gone a long way in providing a confident and accurate estimate of decay rate.\\
+
+In addition to noise, it is also conceivable for dead time to affect such a measurement; if the high count rates, well above those observed of the 1.0~\micCi~sources, were sufficiently more strongly impacted by dead time than by later measurements in the period, the early activity may not seem as relatively higher than later activity, resulting in a slightly suppressed estimate of decay rate.
 
 %  $562\pm2~\mathrm{\mu s}$.
 % Measuring from the initial peak instead to where traces reached 95\% of their base amplitude ($12.6875\pm0.0625$~V), we measured a 95\% recovery time of $1384\pm2~\mathrm{\mu s}$.\\
 \section{Conclusions}\label{sec:conc}
 
 \appendix
-\section{Equipment Details}
+\section{Equipment Details}\label{app:equip}
 In order to better replicate experiments and identify issues, the details of each equipment piece are recorded in Table~\ref{tab:equip}
 
 \newcommand{\na}{$N/A$}
@@ -246,6 +365,92 @@ In order to better replicate experiments and identify issues, the details of eac
     \end{tabular}
 
 \end{table}
+
+\section{Paralyzable Model Calculations}\label{app:para-script}
+The following \texttt{Python} script using the module \texttt{numpy} was used to solve for the dead time of a paralyzable detector using the two source method:
+\begin{verbatim}
+import numpy as np
+
+ITERCOUNT = 1000
+
+def find_n(m, dead_time):
+    trials = ITERCOUNT
+
+    n_peak = 1/dead_time # Maximum n could be before m starts going back down again
+
+    t = dead_time
+    n_max = n_peak
+    n_min = m / (1- m*t)
+    
+    n = (n_max + n_min) / 2
+    # bisection algorithm
+    for i in range(trials):
+        n = (n_max + n_min) / 2
+        new_m = n*np.exp(-n*t)
+
+        if (new_m > m): # That n was too high, because it should result in a lower count rate than what we actually observed
+            n_max = n
+        else:
+            n_min = n
+    return n
+
+def find_t(m1, m2, m12):
+    tmin = 0
+    tmax = 1/(m12*np.exp(1))
+    t = (tmin + tmax) / 2
+    n1 = 0
+    n2 = 0
+    n12 = 0
+    for i in range(ITERCOUNT):
+        t = (tmin + tmax) / 2
+        n1 = find_n(m1, t)
+        n2 = find_n(m2, t)
+        n12 = find_n(m12, t)
+
+        if n12 > n1 + n2: # Overestimated dead time
+            tmax = t
+        else:
+            tmin = t
+    # print(f"Final n: {n1}, {n2}, {n12}")
+    return t
+
+# Experimental data, s^-1
+M1 = 1.756
+M2 = 1.700
+M12 = 3.400
+E1 = 0.112
+E2 = 0.111
+E12 = 0.147
+
+print(f"Observed rates: m1 of {M1}+-{E1}, m2 of {M2}+-{E2}, m12 of {M12}+-{E12}")
+print("All dead time (t) estimates in seconds.")
+print(f"t: {find_t(M1, M2, M12)}")
+
+dm = 0.001 #s^-1
+dt_dm1 = (find_t(M1+dm, M2, M12) - find_t(M1-dm, M2, M12)) / (2*dm)
+print(f'dt_dm1: {dt_dm1} s')
+dt_dm2 = (find_t(M1, M2+dm, M12) - find_t(M1, M2-dm, M12)) / (2*dm)
+print(f'dt_dm2: {dt_dm2} s')
+dt_dm12 = (find_t(M1, M2, M12+dm) - find_t(M1, M2, M12-dm)) / (2*dm)
+print(f'dt_dm2: {dt_dm12} s')
+
+def sq(x):
+    return x*x
+ET = np.sqrt(sq(dt_dm1)*sq(E1) + sq(dt_dm2)*sq(E2) + sq(dt_dm12)*sq(E12))
+print(f'Dead time error: {ET}')
+
+#### OUTPUT WITH ITERCOUNT=1000 ####
+# Observed rates: m1 of 1.756+-0.112, m2 of 1.7+-0.111, m12 of 3.4+-0.147
+# All dead time (t) estimates in seconds.
+# t: 0.009303179442311068
+# dt_dm1: 0.15947962250417377 s
+# dt_dm2: 0.15930658013714633 s
+# dt_dm2: -0.16475597860401459 s
+# Dead time error: 0.03490410758591285
+
+## Script written by Owen Strong for Laboratory 3 of UIUC NPRE451: Radiation Laboratory
+## February 21, 2026
+\end{verbatim}
 
 % \bibliographystyle{sty/ieeetran}
 \printbibliography
